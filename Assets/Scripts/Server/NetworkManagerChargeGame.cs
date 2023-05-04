@@ -1,7 +1,9 @@
 using Mirror;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ChargeGame
 {
@@ -103,7 +105,6 @@ namespace ChargeGame
         }
 
         #endregion
-
 
         // TODO Better move this logics to other class
         #region Game Logics
