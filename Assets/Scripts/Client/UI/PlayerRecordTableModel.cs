@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ChargeGame
 {
-    public class PlayerRecordTableModel
+    public class PlayerRecordTableModel : ModelBase
     {
         private ClientContext _clientContext;
 
@@ -19,23 +19,17 @@ namespace ChargeGame
             _clientContext = clientContext;
         }
 
-        public void Enable()
+        protected override void EnableInternal()
         {
             UpdateUnits();
-            Subscribe();
         }
 
-        public void Disable()
-        {
-            Unsubscribe();
-        }
-
-        private void Subscribe()
+        protected override void Subscribe()
         {
             _clientContext.UnitAdded += AddClientUnit;
             _clientContext.UnitRemoved += RemoveClientUnit;
         }
-        private void Unsubscribe()
+        protected override void Unsubscribe()
         {
             _clientContext.UnitAdded -= AddClientUnit;
             _clientContext.UnitRemoved -= RemoveClientUnit;

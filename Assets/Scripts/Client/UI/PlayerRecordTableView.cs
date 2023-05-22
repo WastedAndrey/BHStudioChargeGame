@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChargeGame
 {
-    public class PlayerRecordTableView : MonoBehaviour, UIElement
+    public class PlayerRecordTableView : ViewBase, UIElement
     {
         [SerializeField]
         private ClientContext _clientContext;
@@ -16,8 +16,6 @@ namespace ChargeGame
 
         private Dictionary<PlayerRecordItemModel, PlayerRecordItemView> _items = new Dictionary<PlayerRecordItemModel, PlayerRecordItemView>();
 
-        public Action<UIElement> Closed { get; set; }
-
         public void SetModel(PlayerRecordTableModel model)
         {
             _model = model;
@@ -28,14 +26,14 @@ namespace ChargeGame
         {
             Unsubscribe();
         }
-        public void CloseElement()
+
+        protected override void CloseElementInternal()
         {
+            base.CloseElementInternal();
             foreach (var item in _items.Values)
             {
                 item.CloseElement();
             }
-            Closed?.Invoke(this);
-            Destroy(this.gameObject);
         }
 
         private void OnEnable()

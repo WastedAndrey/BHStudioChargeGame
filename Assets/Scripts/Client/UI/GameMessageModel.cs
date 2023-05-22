@@ -3,7 +3,7 @@ using System;
 
 namespace ChargeGame
 {
-    public class GameMessageModel
+    public class GameMessageModel : ModelBase
     {
         private ClientContext _context;
 
@@ -15,20 +15,12 @@ namespace ChargeGame
             _context = context;
         }
 
-        public void Enable()
-        {
-            Subscribe();
-        }
-        public void Disable()
-        {
-            Unsubscribe();
-        }
 
-        private void Subscribe()
+        protected override void Subscribe()
         {
             _context.NewMessageRecieved += UpdateText;
         }
-        private void Unsubscribe()
+        protected override void Unsubscribe()
         {
             _context.NewMessageRecieved -= UpdateText;
         }

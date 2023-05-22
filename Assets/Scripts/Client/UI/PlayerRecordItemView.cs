@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ChargeGame
 {
-    public class PlayerRecordItemView : MonoBehaviour, UIElement
+    public class PlayerRecordItemView : ViewBase, UIElement
     {
         [SerializeField]
         private TextMeshProUGUI _playerName;
@@ -14,19 +14,13 @@ namespace ChargeGame
 
         private PlayerRecordItemModel _model;
 
-        public Action<UIElement> Closed { get; set; }
-
         public void SetModel(PlayerRecordItemModel model)
         {
             _model = model;
             Subscribe();
             _model.Enable();
         }
-        public void CloseElement()
-        {
-            Closed?.Invoke(this);
-            Destroy(this.gameObject);
-        }
+
         private void OnDestroy()
         {
             Unsubscribe();

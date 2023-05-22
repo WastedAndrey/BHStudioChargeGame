@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ChargeGame
 {
-    public class PlayerRecordItemModel
+    public class PlayerRecordItemModel : ModelBase
     {
         private ClientUnit _unit;
         private StringBuilder _builder = new StringBuilder();
@@ -19,23 +19,18 @@ namespace ChargeGame
         {
             _unit = unit;
         }
-        public void Enable()
+        protected override void EnableInternal()
         {
             OnNameChanged(_unit.PlayerName);
             UpdateScore();
-            Subscribe();
         }
-        public void Disable()
-        {
-            Unsubscribe();
-        }
-        private void Subscribe()
+        protected override void Subscribe()
         {
             _unit.NameChanged += OnNameChanged;
             _unit.ScoreChanged += OnScoreChanged;
             _unit.FailsChanged += OnScoreChanged;
         }
-        private void Unsubscribe()
+        protected override void Unsubscribe()
         {
             _unit.NameChanged -= OnNameChanged;
             _unit.ScoreChanged -= OnScoreChanged;

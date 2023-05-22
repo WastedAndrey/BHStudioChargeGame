@@ -56,6 +56,12 @@ namespace ChargeGame
         public short Fails { get => _fails; }
         public Transform CameraPoint { get => _cameraPoint; }
 
+
+        public Color32 GetColor()
+        {
+            return _color;
+        }
+
         public void SetUnit(ServerUnit unit)
         {
             _unit = unit;

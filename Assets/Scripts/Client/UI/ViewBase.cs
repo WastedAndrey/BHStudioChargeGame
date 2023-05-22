@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChargeGame
 {
-    public class UIElementBase : MonoBehaviour, UIElement
+    public abstract class ViewBase : MonoBehaviour, UIElement
     {
         public Action<UIElement> Closed { get; set; }
 
@@ -16,5 +16,10 @@ namespace ChargeGame
         }
 
         protected virtual void CloseElementInternal() { }
+
+        public void SetParent(Transform transform, bool worldPositionStays)
+        {
+            this.transform.SetParent(transform, false);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UnityEngine;
 
 namespace ChargeGame
 {
@@ -7,5 +8,6 @@ namespace ChargeGame
     {
         Action<UIElement> Closed { get; set; }
         void CloseElement();
+        void SetParent(Transform transform, bool worldPositionStays = false);
     }
 }

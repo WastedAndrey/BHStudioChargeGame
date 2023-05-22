@@ -36,21 +36,25 @@ namespace ChargeGame
         }
 
         public void CreateRecordTable()
-        {
+        { // здесь могло бы быть что-то вроде метода OpenWindow<КлассОкна>, который в своей реализации открывал бы префаб
+            // через adressables или типа того. Но в данном задании мне показалось избыточным
             var newRecordTable = Instantiate(_prefabRecordTable);
             newRecordTable.SetModel(new PlayerRecordTableModel(_clientContext));
-            newRecordTable.Closed += OnElementClosed;
-            newRecordTable.transform.SetParent(_canvas.transform, false);
-            _uiElements.Add(newRecordTable);
+            InitUIElement(newRecordTable);
         }
 
         public void CreateGameMessage()
         {
             var newGameMessage = Instantiate(_prefabGameMessage);
             newGameMessage.SetModel(new GameMessageModel(_clientContext));
-            newGameMessage.Closed += OnElementClosed;
-            newGameMessage.transform.SetParent(_canvas.transform, false);
-            _uiElements.Add(newGameMessage);
+            InitUIElement(newGameMessage);
+        }
+
+        private void InitUIElement(UIElement uiElement)
+        {
+            uiElement.Closed += OnElementClosed;
+            uiElement.SetParent(_canvas.transform);
+            _uiElements.Add(uiElement);
         }
 
         public void CloseAll()
